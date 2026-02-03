@@ -156,4 +156,4 @@ For more information about CVAT server setup, refer to [Cvat docs](https://docs.
     ```
 
 ## License
-[MIT](https://github.com/midas-research/audino/blob/master/LICENSE) © MIDAS, IIIT Delhi
+[CC BY-NC 4.0](https://github.com/midas-research/audino/blob/main/LICENSE) © MIDAS, IIIT Delhi
