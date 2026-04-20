@@ -12,8 +12,10 @@ services:
       JWT_SECRET_KEY: "secretkey"
       JWT_REDIS_STORE_URL: "redis://:audino@redis:6379/0"
     depends_on:
-      - mysql
-      - redis
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - backend-network
       - frontend-network
@@ -43,6 +45,11 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_USER: "audino"
       MYSQL_PASSWORD: "audino"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - backend-network
 
