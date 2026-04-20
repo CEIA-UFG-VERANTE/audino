@@ -35,7 +35,7 @@ services:
       - frontend-network
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     volumes:
       - ./mysql:/mysql
       - mysql_prod_data:/var/lib/mysql
