@@ -37,14 +37,12 @@ services:
   mysql:
     image: mysql:8.0
     volumes:
-      - ./mysql:/mysql
       - mysql_prod_data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: "audino"
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_USER: "audino"
       MYSQL_PASSWORD: "audino"
-    command: --init-file=/data/compose/2/mysql/create_database.sql --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
     networks:
       - backend-network
 
