@@ -47,7 +47,7 @@ services:
       MYSQL_USER: "audino"
       MYSQL_PASSWORD: "audino"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "audino", "-paudino"]
       interval: 10s
       timeout: 5s
       retries: 5

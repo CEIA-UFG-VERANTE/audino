@@ -26,6 +26,7 @@ while retry < max_retries:
         break
     except Exception as e:
         print(f"Couldn't connect to MySQL: {retry}/{max_retries}", flush=True)
+        print(e, flush=True)
         time.sleep(poll_seconds)
         retry += 1
 
