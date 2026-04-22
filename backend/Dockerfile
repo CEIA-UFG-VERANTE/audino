@@ -4,7 +4,7 @@ COPY ./uwsgi.ini /app/
 
 WORKDIR /app/backend
 
-RUN apk add build-base linux-headers pcre-dev
+RUN apk add build-base linux-headers pcre-dev libffi-dev openssl-dev
 
 COPY ./requirements.txt /app/backend
 
