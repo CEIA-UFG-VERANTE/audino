@@ -101,6 +101,36 @@ Then, in browser, go to [http://localhost:3000/](http://localhost:3000/) to view
 $ docker-compose -f docker-compose.dev.yml down
 ```
 
+## Upload do dataset (carga_cheia)
+
+### 1. Criar usuários
+
+Crie os usuários anotadores diretamente na interface do audino (painel de admin).
+
+### 2. Subir áudios + pré-transcrições
+
+Use o script `upload.py` para enviar os pares `.wav` + `.txt` do `dataset_1` em lote, distribuindo entre os anotadores em round-robin.
+
+**Pré-requisito:** defina a API key do projeto (disponível nas configurações do projeto no audino):
+
+```sh
+export API_KEY="sua_chave_aqui"
+```
+
+**Preview da distribuição (sem subir nada):**
+
+```sh
+python upload.py --users ana joao maria --host localhost --port 3000 --dry-run
+```
+
+**Upload de verdade:**
+
+```sh
+python upload.py --users ana joao maria --host localhost --port 3000
+```
+
+Os usernames devem corresponder exatamente aos cadastrados no audino. A transcrição de cada `.txt` é carregada como `reference_transcription` para o anotador revisar.
+
 ## Tutorials
 
 We provide a set of [tutorials](./docs/tutorial.md) to guide users to achieve certain tasks. If you feel something is missing and should be included, please open an [issue](https://github.com/midas-research/audino/issues).
