@@ -31,8 +31,10 @@ services:
     restart: always
     volumes:
       - www:/var/www/html:ro
+      - /home/ubuntu:/etc/nginx/certs:ro
     ports:
-      - 80:80
+      - "80:80"
+      - "443:443"
     depends_on:
       - backend
     networks:
