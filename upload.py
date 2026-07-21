@@ -22,12 +22,12 @@ parser = argparse.ArgumentParser(description="Upload em lote do dataset_1 para o
 parser.add_argument("--users", nargs="+", required=True, help="Usernames para distribuir os dados")
 parser.add_argument("--dataset-dir", type=str, default="dataset_1", help="Pasta raiz do dataset (default: dataset_1)")
 parser.add_argument("--host", type=str, default="localhost")
-parser.add_argument("--port", type=int, default=3000)
+parser.add_argument("--port", type=int)
 parser.add_argument("--dry-run", action="store_true", help="Mostra distribuicao sem fazer upload")
 parser.add_argument("--is-marked-for-review", action="store_true")
 args = parser.parse_args()
 
-api_key = os.getenv("API_KEY")
+api_key = os.getenv("API_KEY", '06d1f275c4cf452fac84ecddf991c5ad')
 if not api_key and not args.dry_run:
     print("Erro: variavel de ambiente API_KEY nao definida.")
     sys.exit(1)
@@ -71,7 +71,7 @@ if args.dry_run:
     sys.exit(0)
 
 # Upload
-url = f"http://{args.host}:{args.port}/api/data"
+url = f"http://{args.host}:{args.port}/api/data/" if args.port else f"http://{args.host}/api/data"
 headers = {"Authorization": api_key}
 
 total = len(pairs)
@@ -96,6 +96,7 @@ for user, items in distribution.items():
         if response.status_code == 201:
             print(f"  [{done}/{total}] OK  {wav.name}")
         else:
+            print("response:", response.status_code, response.text)
             msg = response.json().get("message", response.text)
             print(f"  [{done}/{total}] ERRO {wav.name}: {msg}")
             errors.append((wav.name, msg))
@@ -105,3 +106,4 @@ if errors:
     print("Arquivos com erro:")
     for name, msg in errors:
         print(f"  {name}: {msg}")
+
