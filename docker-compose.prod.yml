@@ -37,8 +37,8 @@ services:
       - "443:443"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    depends_on:
-      - backend
+    # depends_on:
+    #   - backend
     networks:
       - frontend-network
 
